@@ -97,7 +97,7 @@ module.exports.GetProductAdmin = (req, res) => {
   });
 };
 
-module.exports.DeleteProduct = (req, res) => {
+module.exports.deleteProduct = (req, res) => {
   Product.findOneAndDelete({ _id: req.body.id }).exec((error, data) => {
     if (error) {
       return res.status(400).json({ error });
@@ -121,7 +121,7 @@ module.exports.ProductDetail = (req, res) => {
     });
 };
 
-module.exports.ProductEdit = (req, res) => {
+module.exports.editProduct= (req, res) => {
   const {
     name,
     price,
@@ -166,6 +166,7 @@ module.exports.ProductEdit = (req, res) => {
     }
   );
 };
+
 
 module.exports.GetProductsFilterByCategory=(req,res)=>{
 Product.find({category:req.params.category})
