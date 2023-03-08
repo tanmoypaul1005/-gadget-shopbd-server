@@ -18,7 +18,7 @@ module.exports.addCategory = (req, res) => {
     cat.save((error, category) => {
         if (error) return res.status(400).json({ message: error.message, success: false });
         else if (category) {
-            return res.status(201).json({ category, success: false });
+            return res.status(201).json({ message: "Add category successfully", category, success: false });
         }
     })
 }
@@ -46,19 +46,20 @@ function createCategories(categories, parentId = null) {
 exports.getCategories = (req, res) => {
     Category.find({})
         .exec((error, categories) => {
-            if (error) return res.status(400).json({ error });
+            if (error) return res.status(400).json({ error, success: false });
             if (categories) {
-                const categoryList = createCategories(categories);
-                res.status(200).json({ categoryList })
+                const data = createCategories(categories);
+                res.status(200).json({ data, success: true });
             }
         })
 }
 
+//get category details
 module.exports.CategoryDetail = (req, res) => {
     Category.findOne({ _id: req.body.id })
         .exec((error, data) => {
-            if (error) { return res.status(400).json({ error }) }
-            if (data) { return res.status(200).json({ data }) }
+            if (error) { return res.status(400).json({ error, success: false }) }
+            if (data) { return res.status(200).json({ data, success: true }) }
         })
 }
 
