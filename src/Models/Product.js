@@ -23,15 +23,15 @@ const ProductSchema = new mongoose.Schema(
 
     image: { type: String } ,
 
-    brand: { 
+    brand: {
       type: String
      },
 
-    description: { 
-      type: String 
+    description: {
+      type: String
     },
 
-    offerPrice: { 
+    offerPrice: {
       type: Number
     },
     quantity: { type: String },

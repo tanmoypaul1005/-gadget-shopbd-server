@@ -16,18 +16,18 @@ module.exports.AddProduct = (req, res) => {
     status,
     offer,
     image,
+    quantity
   } = req.body;
-  
+
   //  console.log(req.body)
   const price1 = parseInt(price);
-  const price2 = parseInt(offer);
-  const offerpass = price2 / 100;
-  const offerprice = price1 - price1 * offerpass;
-  console.log(offerprice);
 
+  const offerPercentage = parseInt(offer)/ 100;
+  const offerPrice = price1 - price1 * offerPercentage;
+  console.log(offerPrice);
   Product.findOne({ name: name }).exec((error, data) => {
     if (data) {
-      return res.status(404).json({ msg: "Product All Rady Register",success:false });
+      return res.status(404).json({ msg: "Product All Ready Register",success:false });
     }
     const _product = new Product({
       name,
@@ -41,8 +41,8 @@ module.exports.AddProduct = (req, res) => {
       reviews,
       status,
       offer,
-      productPictures,
-      offerprice: offerprice,
+      image,
+      offerPrice: offerPrice,
       reviews: [],
       quantity,
     });
