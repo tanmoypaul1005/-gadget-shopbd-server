@@ -66,7 +66,12 @@ module.exports.getProductDetails = (req, res) => {
     .exec((error, product) => {
       if (error) return res.status(400).json({ message: "Somethings is Wrong", success: false });
       if (product) {
-        const totalReviews = product.reviews.length;
+
+        let reviewRate = "";
+        for (let item of product?.reviews) {
+          reviewRate = reviewRate + item?.star / product?.reviews?.length
+        }
+        const totalReviews = product?.reviews?.length;
         const data = {
           name: product.name,
           price: product.price,
@@ -80,6 +85,7 @@ module.exports.getProductDetails = (req, res) => {
           status: product.status,
           offer: product.offer,
           totalReviews,
+          reviewRate
         };
         return res.status(200).json({ data, success: true });
       }
@@ -108,15 +114,16 @@ module.exports.deleteProduct = (req, res) => {
   });
 };
 
-module.exports.ProductDetail = (req, res) => {
-  Product.findOne({ _id: req.body.id })
+//get Product List
+module.exports.getProduct = (req, res) => {
+  Product.find({})
     .populate("category")
     .exec((error, data) => {
       if (error) {
-        return res.status(400).json({ error });
+        return res.status(400).json({ error, success: false });
       }
       if (data) {
-        return res.status(200).json({ data });
+        return res.status(200).json({ data, success: true });
       }
     });
 };
@@ -177,6 +184,18 @@ module.exports.GetProductsFilterByCategory = (req, res) => {
         return res.status(200).json({ data, success: true });
       }
     });
+}
+
+
+// user Add Comment
+module.exports.addReview = (req, res) => {
+  const { id, comment, star, user } = req.body;
+  const reviewsItem = { comment, star, user }
+  Product.findOneAndUpdate({ _id: id }, { $push: { reviews: reviewsItem } }, { new: true, upsert: true, setDefaultsOnInsert: true })
+      .exec((error, data) => {
+          if (error) { return res.status(500).json({ error, success: false }); }
+          if (data) { return res.status(200).json({ msg: 'Your Comment Add successfully', data, success: true }); }
+      })
 }
 
 

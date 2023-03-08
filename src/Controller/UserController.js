@@ -14,7 +14,7 @@ module.exports.AddUser=(req,res,next)=>{
     });
   }
 
-  
+
   User.findOne({email:email})
   .exec((error,data)=>{
    if(data){return next(new ErrorHander("User All Rady Register", 500));}

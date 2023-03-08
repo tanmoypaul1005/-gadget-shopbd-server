@@ -47,8 +47,6 @@ const ProductSchema = new mongoose.Schema(
       default: "Regular Product",
     },
 
-    // totalreviews:{type:Number},
-
     reviews: [
       {
         user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

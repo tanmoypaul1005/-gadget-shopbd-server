@@ -42,17 +42,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-
-
-
-
 const AdminRoutes=require('./Route/Admin/AdminRoute');
 const UserRoutes=require('./Route/UserRoute');
 const CategoryRoute=require('./Route/CategoryRouter');
 const ProductRoute=require('./Route/ProductRoute');
 const CartRoute=require('./Route/CartRoute');
 const AddressRoute=require('./Route/AddressRoute');
-const ReviewRoute=require('./Route/ReviewsRoutes');
 const OrderRoute=require('./Route/OrderRoute');
 const sslRoute=require('./Route/sslRoute');
 const RelatedProductRoute=require('./Route/RelatedProductRoute');
@@ -63,11 +58,10 @@ app.use('/api',CategoryRoute);
 app.use('/api',ProductRoute);
 app.use('/api',CartRoute);
 app.use('/api',AddressRoute);
-app.use('/api',ReviewRoute);
 app.use('/api',OrderRoute);
 app.use('/api',sslRoute);
 app.use('/api',RelatedProductRoute);
 
-app.listen(process.env.PORT, () => {
-  console.log(`This app listening on port ${process.env.PORT}`)
+app.listen(5000, () => {
+  console.log(`This app listening on port 5000`)
 })
