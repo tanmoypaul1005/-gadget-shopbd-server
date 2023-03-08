@@ -10,6 +10,7 @@ const categorySchema = new mongoose.Schema(
     image: {
          type: String
         },
+
     slug: {type: String},
 
     parentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },

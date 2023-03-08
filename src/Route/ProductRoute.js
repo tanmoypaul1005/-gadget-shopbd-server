@@ -7,7 +7,6 @@ const router = app.Router();
 router.post('/product/add',AddProduct);
 router.get('/product',getProduct);
 
-
 router.get('/product/:id',getProductDetails);
 // router.post('/product/admin/get',GetProductAdmin);
 router.post('/product/delete',deleteProduct);

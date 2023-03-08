@@ -12,7 +12,7 @@ router.post('/user/login',UserLogin);
 //Get All User List
 router.get('/user/get',GetUser);
 
-//Singel User Delete 
+//Singel User Delete
 router.post('/user/delete',DeleteUser);
 
 module.exports = router;
