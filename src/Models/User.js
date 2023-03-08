@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose");
 const bcrypt = require('bcrypt');
 const UserSchema=new mongoose.Schema({
+
     name: {
         type: String,
         required: true,
@@ -21,9 +22,9 @@ const UserSchema=new mongoose.Schema({
         required: true
     },
 
-    userPicture: [
-        { img: { type: String } }
-      ],
+    img: {
+         type: String
+    },
 
     address:{
         type: String,

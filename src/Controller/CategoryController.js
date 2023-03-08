@@ -2,8 +2,9 @@ const slugify = require('slugify');
 const shortid = require('shortid');
 const Category = require('../Models/Category');
 
-module.exports.AddCategory = (req, res) => {
-    console.log(req.body)
+//add category
+module.exports.addCategory = (req, res) => {
+
     const categoryObj = {
         name: req.body.name,
         slug: slugify(req.body.name),
@@ -15,9 +16,9 @@ module.exports.AddCategory = (req, res) => {
 
     const cat = new Category(categoryObj);
     cat.save((error, category) => {
-        if (error) return res.status(400).json({ message: error.message });
+        if (error) return res.status(400).json({ message: error.message, success: false });
         else if (category) {
-            return res.status(201).json({ category });
+            return res.status(201).json({ category, success: false });
         }
     })
 }
@@ -41,8 +42,9 @@ function createCategories(categories, parentId = null) {
     return categoryList;
 };
 
+//get Category
 exports.getCategories = (req, res) => {
-    Category.find({ })
+    Category.find({})
         .exec((error, categories) => {
             if (error) return res.status(400).json({ error });
             if (categories) {
@@ -52,13 +54,13 @@ exports.getCategories = (req, res) => {
         })
 }
 
-module.exports.CategoryDetail=(req,res)=>{
-    Category.findOne({_id:req.body.id})
-    .exec((error,data)=>{
-        if(error){return res.status(400).json({error})}
-        if(data){return res.status(200).json({data})}
-    })
- }
+module.exports.CategoryDetail = (req, res) => {
+    Category.findOne({ _id: req.body.id })
+        .exec((error, data) => {
+            if (error) { return res.status(400).json({ error }) }
+            if (data) { return res.status(200).json({ data }) }
+        })
+}
 
 
 

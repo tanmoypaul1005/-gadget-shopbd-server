@@ -22,12 +22,12 @@ module.exports.AddProduct = (req, res) => {
   //  console.log(req.body)
   const price1 = parseInt(price);
 
-  const offerPercentage = parseInt(offer)/ 100;
+  const offerPercentage = parseInt(offer) / 100;
   const offerPrice = price1 - price1 * offerPercentage;
   console.log(offerPrice);
   Product.findOne({ name: name }).exec((error, data) => {
     if (data) {
-      return res.status(404).json({ msg: "Product All Ready Register",success:false });
+      return res.status(404).json({ message: "Product All Ready Register", success: false });
     }
     const _product = new Product({
       name,
@@ -48,10 +48,10 @@ module.exports.AddProduct = (req, res) => {
     });
     _product.save((error, data) => {
       if (error) {
-        return res.status(400).json({ msg: "Somethings is Wrong", error,success:false });
+        return res.status(400).json({ msg: "Somethings is Wrong", error, success: false });
       }
       if (data) {
-        return res.status(200).json({ msg: "Product Create Successfully", data,success:true });
+        return res.status(200).json({ msg: "Product Create Successfully", data, success: true });
       }
     });
   });
@@ -64,7 +64,7 @@ module.exports.getProductDetails = (req, res) => {
     .populate("reviews.user")
     .populate("category")
     .exec((error, product) => {
-      if (error) return res.status(400).json({ msg: "Somethings is Wrong",success:false });
+      if (error) return res.status(400).json({ message: "Somethings is Wrong", success: false });
       if (product) {
         const totalReviews = product.reviews.length;
         const data = {
@@ -81,7 +81,7 @@ module.exports.getProductDetails = (req, res) => {
           offer: product.offer,
           totalReviews,
         };
-        return res.status(200).json({ data,success:true });
+        return res.status(200).json({ data, success: true });
       }
     });
 };
@@ -100,10 +100,10 @@ module.exports.GetProductAdmin = (req, res) => {
 module.exports.deleteProduct = (req, res) => {
   Product.findOneAndDelete({ _id: req.body.id }).exec((error, data) => {
     if (error) {
-      return res.status(400).json({ error });
+      return res.status(400).json({ error, success: false });
     }
     if (data) {
-      return res.status(200).json({ msg: "Product is Delete" });
+      return res.status(200).json({ msg: "Product is Delete", success: true });
     }
   });
 };
@@ -121,7 +121,7 @@ module.exports.ProductDetail = (req, res) => {
     });
 };
 
-module.exports.editProduct= (req, res) => {
+module.exports.editProduct = (req, res) => {
   const {
     name,
     price,
@@ -157,26 +157,26 @@ module.exports.editProduct= (req, res) => {
 
   Product.findOneAndUpdate({ id: req.body.id }, updatedPost).exec(
     (error, data) => {
-      if (error) return res.status(500).json({ error });
+      if (error) return res.status(500).json({ error, success: false });
       if (data) {
         return res
           .status(200)
-          .json({ msg: "your Product is successfully Updated", data });
+          .json({ message: "your Product is successfully Updated", data, success: true });
       }
     }
   );
 };
 
-module.exports.GetProductsFilterByCategory=(req,res)=>{
-Product.find({category:req.params.category})
-.exec((error, data) => {
-  if (error) {
-    return res.status(400).json({ error });
-  }
-  if (data) {
-    return res.status(200).json({ data });
-  }
-});
+module.exports.GetProductsFilterByCategory = (req, res) => {
+  Product.find({ category: req.params.category })
+    .exec((error, data) => {
+      if (error) {
+        return res.status(400).json({ error, success: false });
+      }
+      if (data) {
+        return res.status(200).json({ data, success: true });
+      }
+    });
 }
 
 
