@@ -2,17 +2,18 @@ const { default: mongoose } = require("mongoose");
 
 const categorySchema = new mongoose.Schema(
   {
-    name: { 
+    name: {
         type: String,
-        required: true, 
-        trim: true 
+        required: true,
+        trim: true
     },
-    categoryImage: {
+    image: {
          type: String 
         },
     slug: {type: String},
-    // parentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
-    parentId: { type:String },
+    
+    parentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
+
   },
   { timestamps: true }
 );
