@@ -4,8 +4,8 @@ const router = app.Router();
 
 
 //Add Related Product
-router.post('/relatedproduct/add',AddRelatedProduct);
+router.post('/related-product/add',AddRelatedProduct);
 
 //Get Related Product
-router.get('/relatedproduct/:id',GetRelatedProduct)
+router.get('/related-product/:id',GetRelatedProduct)
 module.exports = router;

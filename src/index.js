@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 require('dotenv').config();
-const DataBaseconnect = require("./config/DataBase");
+const DataBaseConnect = require("./config/DataBase");
 const passport = require("passport");
 const session = require('express-session');
 const cookieParser = require("cookie-parser");
@@ -36,8 +36,8 @@ app.use(session({
   // cookie: { secure: true }
 }))
 
-//DataBase Connectd
-DataBaseconnect()
+//DataBase Connected
+DataBaseConnect()
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
