@@ -66,7 +66,7 @@ module.exports.getProductDetails = (req, res) => {
     .exec((error, product) => {
       if (error) return res.status(400).json({ msg: "Somethings is Wrong",success:false });
       if (product) {
-        const totalreviews = product.reviews.length;
+        const totalReviews = product.reviews.length;
         const data = {
           name: product.name,
           price: product.price,
@@ -79,7 +79,7 @@ module.exports.getProductDetails = (req, res) => {
           reviews: product.reviews,
           status: product.status,
           offer: product.offer,
-          totalreviews,
+          totalReviews,
         };
         return res.status(200).json({ data,success:true });
       }
@@ -166,7 +166,6 @@ module.exports.editProduct= (req, res) => {
     }
   );
 };
-
 
 module.exports.GetProductsFilterByCategory=(req,res)=>{
 Product.find({category:req.params.category})
