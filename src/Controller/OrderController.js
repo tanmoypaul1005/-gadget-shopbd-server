@@ -23,6 +23,7 @@ module.exports.addOrder = (req, res) => {
             type: "shipped",
             isCompleted: false,
           },
+          
           {
             type: "delivered",
             isCompleted: false,
