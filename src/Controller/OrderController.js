@@ -23,11 +23,12 @@ module.exports.addOrder = (req, res) => {
             type: "shipped",
             isCompleted: false,
           },
-          
+
           {
             type: "delivered",
             isCompleted: false,
           },
+
         ];
         const order = new Order(req.body);
         order.save((error, order) => {
