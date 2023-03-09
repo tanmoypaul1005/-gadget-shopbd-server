@@ -13,10 +13,12 @@ module.exports.addOrder = (req, res) => {
             date: new Date(),
             isCompleted: true,
           },
+
           {
             type: "packed",
             isCompleted: false,
           },
+
           {
             type: "shipped",
             isCompleted: false,
