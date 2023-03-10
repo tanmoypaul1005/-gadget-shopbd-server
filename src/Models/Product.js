@@ -21,11 +21,11 @@ const ProductSchema = new mongoose.Schema(
 
     category: { type: mongoose.Schema.Types.ObjectId, ref: "Category" },
 
-    image: { type: String } ,
+    image: { type: String },
 
     brand: {
       type: String
-     },
+    },
 
     description: {
       type: String
@@ -53,6 +53,12 @@ const ProductSchema = new mongoose.Schema(
         comment: { type: String },
         star: { type: Number },
         required: false,
+      },
+    ],
+
+    relatedProduct: [
+      {
+        product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
       },
     ],
   },
