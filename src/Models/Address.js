@@ -1,9 +1,12 @@
 const mongoose=require('mongoose');
+
 const AddressSchema=new mongoose.Schema({
+
 user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+
 address:[
     {
-        name: {
+        title: {
         type: String,
         required: true,
         trim: true,
@@ -47,12 +50,12 @@ address:[
         required: true,
         trim: true,
       },
-      rodename:{
+      rode_name:{
         type: String,
         required: true,
         required: true,
       },
-      Housename: {
+      house_name: {
         type: String,
         required: true,
         trim: true,

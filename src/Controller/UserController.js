@@ -6,7 +6,7 @@ const passport = require("passport");
 require("../config/Passport")(passport);
 
 module.exports.AddUser=(req,res,next)=>{
-  const{ name,email,password,contactNumber}=req.body; 
+  const{ name,email,password,contactNumber}=req.body;
   let userPicture = [];
   if (req.files.length > 0) {
     userPicture= req.files.map((file) => {
@@ -30,7 +30,7 @@ module.exports.AddUser=(req,res,next)=>{
  module.exports.UserLogin=(req,res,next)=>{
   User.findOne({email:req.body.email}).exec((error,data)=>{
       if(data.role === 'user'){
-  
+
     passport.authenticate("local", (err, user, info) => {
       if (err) throw err;
       if (!user) return res.status(201).json("No User Exists");

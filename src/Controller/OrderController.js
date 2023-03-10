@@ -1,6 +1,7 @@
 const Cart = require("../Models/Cart");
 const Order = require("../Models/Order");
 
+//add order
 module.exports.addOrder = (req, res) => {
   Cart.deleteOne({ user: req.body.user }).exec((error, result) => {
     if (error) return res.status(400).json({ error, success: false });
@@ -40,6 +41,7 @@ module.exports.addOrder = (req, res) => {
   });
 };
 
+//get order
 module.exports.getOrders = (req, res) => {
   Order.find({ user: req.body.user })
     .select("_id paymentStatus paymentType orderStatus items")
