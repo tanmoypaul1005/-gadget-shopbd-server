@@ -3,7 +3,7 @@ const Product = require("../Models/Product");
 const ObjectId = require("mongodb").ObjectId;
 
 //add product
-module.exports.AddProduct = (req, res) => {
+module.exports.addProduct = (req, res) => {
   const {
     name,
     price,
@@ -93,17 +93,6 @@ module.exports.getProductDetails = (req, res) => {
     });
 };
 
-module.exports.GetProductAdmin = (req, res) => {
-  Product.find({}).exec((error, data) => {
-    if (error) {
-      return res.status(400).json({ error });
-    }
-    if (data) {
-      return res.status(200).json({ data });
-    }
-  });
-};
-
 module.exports.deleteProduct = (req, res) => {
   Product.findOneAndDelete({ _id: req.body.id }).exec((error, data) => {
     if (error) {
@@ -116,8 +105,10 @@ module.exports.deleteProduct = (req, res) => {
 };
 
 //get Product List
-module.exports.getProduct = (req, res) => {
-  Product.find({})
+module.exports.getProduct = (req, res) => {-0-[]
+  Product.find(req.body.status && req.body.category_id ?{ status: req.body.status , category_id: req.body.category_id}
+    :req.body.status && { status: req.body.status },
+     req.body.category_id && {category_id: req.body.category_id })
     .populate("category")
     .exec((error, data) => {
       if (error) {
