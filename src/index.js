@@ -50,7 +50,6 @@ const CartRoute=require('./Route/CartRoute');
 const AddressRoute=require('./Route/AddressRoute');
 const OrderRoute=require('./Route/OrderRoute');
 const sslRoute=require('./Route/sslRoute');
-const RelatedProductRoute=require('./Route/RelatedProductRoute');
 
 app.use('/api',AdminRoutes);
 app.use('/api',UserRoutes);
@@ -60,7 +59,6 @@ app.use('/api',CartRoute);
 app.use('/api',AddressRoute);
 app.use('/api',OrderRoute);
 app.use('/api',sslRoute);
-app.use('/api',RelatedProductRoute);
 
 app.listen(5000, () => {
   console.log(`This app listening on port 5000`)

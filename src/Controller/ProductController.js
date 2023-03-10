@@ -63,6 +63,7 @@ module.exports.getProductDetails = (req, res) => {
   Product.findOne({ _id: req.params.id })
     .populate("reviews.user")
     .populate("category")
+    .populate("Product")
     .exec((error, product) => {
       if (error) return res.status(400).json({ message: "Somethings is Wrong", success: false });
       if (product) {
@@ -186,17 +187,26 @@ module.exports.GetProductsFilterByCategory = (req, res) => {
     });
 }
 
-
 // user Add Comment
 module.exports.addReview = (req, res) => {
   const { id, comment, star, user } = req.body;
   const reviewsItem = { comment, star, user }
   Product.findOneAndUpdate({ _id: id }, { $push: { reviews: reviewsItem } }, { new: true, upsert: true, setDefaultsOnInsert: true })
-      .exec((error, data) => {
-          if (error) { return res.status(500).json({ error, success: false }); }
-          if (data) { return res.status(200).json({ msg: 'Your Comment Add successfully', data, success: true }); }
-      })
+    .exec((error, data) => {
+      if (error) { return res.status(500).json({ error, success: false }); }
+      if (data) { return res.status(200).json({ msg: 'Your Comment Add successfully', data, success: true }); }
+    })
 }
 
+//add Related Product
+module.exports.addRelatedProduct = (req, res) => {
+  Product.findOneAndUpdate({ _id: req.body.product_id }, { $push: { relatedProduct: { product: req.body.related_product_id } } }, { new: true, upsert: true, setDefaultsOnInsert: true })
+    .exec((error, data) => {
+      if (error) return res.status(500).json({ error, success: false });
+      if (data) {
+        return res.status(200).json({ message: 'Your Related Product Add successfully', data, success: true });
+      }
+    })
+}
 
 
