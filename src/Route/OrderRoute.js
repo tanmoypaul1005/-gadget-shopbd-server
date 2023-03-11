@@ -9,5 +9,4 @@ router.post('/order/add',addOrder);
 //get order
 router.post("/order/get", getOrders);
 
-
 module.exports = router;
