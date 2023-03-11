@@ -93,6 +93,7 @@ module.exports.getProductDetails = (req, res) => {
     });
 };
 
+
 module.exports.deleteProduct = (req, res) => {
   Product.findOneAndDelete({ _id: req.body.id }).exec((error, data) => {
     if (error) {
