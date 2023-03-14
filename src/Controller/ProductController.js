@@ -105,7 +105,8 @@ module.exports.deleteProduct = (req, res) => {
 };
 
 //get Product List
-module.exports.getProduct = (req, res) => {-0-[]
+module.exports.getProduct = (req, res) => {
+  console.log("dd",req.body)
   Product.find(req.body.status && req.body.category_id ?{ status: req.body.status , category_id: req.body.category_id}
     :req.body.status && { status: req.body.status },
      req.body.category_id && {category_id: req.body.category_id })

@@ -5,7 +5,7 @@ const router = app.Router();
 
 router.post('/product/add',addProduct);
 
-router.get('/product',getProduct);
+router.post('/product',getProduct);
 
 router.get('/product/:id',getProductDetails);
 
